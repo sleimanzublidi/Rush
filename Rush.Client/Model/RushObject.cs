@@ -23,7 +23,7 @@
         {
             if (String.IsNullOrWhiteSpace(className))
                 throw new ArgumentException("className was not defined.");
-            Initialize(this, null);
+            Initialize(this, className);
         }
 
         public RushObject(object instance)
@@ -31,16 +31,16 @@
             Initialize(instance, null);
         }
 
-        protected virtual void Initialize(object instance, string collectionName)
+        protected virtual void Initialize(object instance, string className)
         {
             this.instance = instance;
             this.instanceType = instance.GetType();
-            this.ClassName = String.IsNullOrWhiteSpace(ClassName) ? instanceType.Name : collectionName;
+            this.ClassName = String.IsNullOrWhiteSpace(className) ? instanceType.Name : className;
         }
 
         #region Properties
 
-        public string ClassName { get; private set; }
+        internal string ClassName;
 
         private string objectId;
         public string ObjectId 

@@ -21,12 +21,12 @@
             string[] segments = RawUrl.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
             if (segments.Length == 3)
             {
-                this.Controller = segments[1];
+                this.Controller = segments[1] + "Controller";
                 this.Resource = segments[2];
             }
             if (segments.Length == 4)
             {
-                this.Controller = segments[1] + "RushController";
+                this.Controller = segments[1] + "Controller";
                 this.Resource = segments[2];
                 this.Id = segments[3];
             }
