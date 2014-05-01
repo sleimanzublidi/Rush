@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -50,13 +51,26 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="RushTests.cs" />
+    <Compile Include="MongoDBHelper.cs" />
+    <Compile Include="RushServerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rush.Client\Rush.Client.csproj">
-      <Project>{9a01c108-3f3f-4ee5-b015-a84fc0ca7e9f}</Project>
-      <Name>Rush.Client</Name>
+    <ProjectReference Include="..\Rush.Data.MongoDB\Rush.Data.MongoDB.csproj">
+      <Project>{869841f8-a129-43f9-badc-971c5721c03b}</Project>
+      <Name>Rush.Data.MongoDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rush.Data.RavenDB\Rush.Data.RavenDB.csproj">
+      <Project>{cb2fb4a4-1bfb-46a5-a03f-e0d46979745d}</Project>
+      <Name>Rush.Data.RavenDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rush.Data\Rush.Data.csproj">
+      <Project>{a9bc3c79-1a63-4764-853a-cde28e75fd6e}</Project>
+      <Name>Rush.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rush.Server\Rush.Server.csproj">
+      <Project>{f422a378-3da2-4a73-ab1c-4ef086dc99a7}</Project>
+      <Name>Rush.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

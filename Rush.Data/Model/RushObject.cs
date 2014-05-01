@@ -12,7 +12,7 @@
     {
         internal object instance;
         internal Type instanceType;
-        private readonly Dictionary<string, DynamicProperty> properties = new Dictionary<string, DynamicProperty>();
+        private readonly Dictionary<string, object> properties = new Dictionary<string, object>();
 
         public RushObject()
         {
@@ -40,40 +40,10 @@
 
         #region Properties
 
-        internal string ClassName;
-
-        private string objectId;
-        public string ObjectId 
-        {
-            get { return objectId; }
-            internal set 
-            { 
-                objectId = value;
-                NotifyPropertyChanged("ObjectId");
-            } 
-        }
-
-        private DateTime? createdAt;
-        public DateTime? CreatedAt
-        {
-            get { return createdAt; }
-            internal set
-            {
-                createdAt = value;
-                NotifyPropertyChanged("CreatedAt");
-            }
-        }
-
-        private DateTime? updatedAt;
-        public DateTime? UpdatedAt
-        {
-            get { return updatedAt; }
-            internal set
-            {
-                updatedAt = value;
-                NotifyPropertyChanged("UpdatedAt");
-            }
-        }
+        public string ClassName { get; set; }        
+        public string ObjectId { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         #endregion
 
@@ -86,7 +56,7 @@
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void SetValue(string propertyName, object value)
+        private void SetValue(string propertyName, object value)
         {
             TrySetMember(new SetMemberValueBinder(propertyName), value);
         }
@@ -104,14 +74,13 @@
                 catch { }
             }
 
-            var propertyType = (value == null) ? typeof(object) : value.GetType();
-            properties[binder.Name] = new DynamicProperty(binder.Name, propertyType, value);
+            properties[binder.Name] = value;
             NotifyPropertyChanged(binder.Name);
             return true;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public object GetValue(string propertyName)
+        private object GetValue(string propertyName)
         {
             object value = null;
             TryGetMember(new GetMemberValueBinder(propertyName), out value);
@@ -119,11 +88,17 @@
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool TryGetValue(string propertyName, out object value)
+        {
+            return TryGetMember(new GetMemberValueBinder(propertyName), out value);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
         sealed public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
             if (properties.Keys.Contains(binder.Name, StringComparer.OrdinalIgnoreCase))
             {
-                result = properties[binder.Name].Value;
+                result = properties[binder.Name];
                 return true;
             }
 
@@ -208,19 +183,19 @@
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public IEnumerable<DynamicProperty> GetProperties(bool includeInstanceProperties = false)
+        public IEnumerable<KeyValuePair<string, object>> GetPropertyValues()
         {
-            if (includeInstanceProperties && instance != null)
+            if (instance != null)
             {
                 foreach (var property in this.InstancePropertyInfo)
                 {
                     if (property.GetIndexParameters().Length == 0)
-                        yield return new DynamicProperty(property.Name, property.PropertyType, property.GetValue(instance, null));
+                        yield return new KeyValuePair<string, object>(property.Name, property.GetValue(instance, null));
                 }   
             }
 
             foreach (var key in properties.Keys)
-                yield return properties[key];
+                yield return new KeyValuePair<string, object>(key, properties[key]);
         }
 
         #endregion
@@ -344,18 +319,5 @@
         }
 
         #endregion
-    }
-
-    public struct DynamicProperty
-    {
-        public DynamicProperty(string propertyName, Type propertyType, object value)
-        {
-            PropertyName = propertyName;
-            PropertyType = propertyType;
-            Value = value;
-        }
-        public readonly string PropertyName;
-        public readonly Type PropertyType;
-        public readonly object Value;
     }
 }

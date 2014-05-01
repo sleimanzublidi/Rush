@@ -45,19 +45,21 @@
     </Compile>
     <Compile Include="Controllers\RushController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="IoC\RushIoC.cs" />
     <Compile Include="RushAuthorizer.cs" />
     <Compile Include="RushEndpoint.cs" />
     <Compile Include="RushContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RushException.cs" />
+    <Compile Include="IoC\TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rush.Data.RavenDB\Rush.Data.RavenDB.csproj">
-      <Project>{cb2fb4a4-1bfb-46a5-a03f-e0d46979745d}</Project>
-      <Name>Rush.Data.RavenDB</Name>
+    <ProjectReference Include="..\Rush.Data.MongoDB\Rush.Data.MongoDB.csproj">
+      <Project>{869841f8-a129-43f9-badc-971c5721c03b}</Project>
+      <Name>Rush.Data.MongoDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\Rush.Data\Rush.Data.csproj">
       <Project>{a9bc3c79-1a63-4764-853a-cde28e75fd6e}</Project>

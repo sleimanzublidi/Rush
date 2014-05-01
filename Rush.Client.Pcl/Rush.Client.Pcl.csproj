@@ -39,13 +39,13 @@
     <Compile Include="..\Rush.Client\Data\RushClient.cs">
       <Link>Data\RushClient.cs</Link>
     </Compile>
-    <Compile Include="..\Rush.Client\Extensions\DataEx.cs">
-      <Link>Extensions\DataEx.cs</Link>
-    </Compile>
     <Compile Include="..\Rush.Client\Internal\TaskQueue.cs">
       <Link>Internal\TaskQueue.cs</Link>
     </Compile>
-    <Compile Include="..\Rush.Client\Model\RushObject.cs">
+    <Compile Include="..\Rush.Data\Extensions\DataEx.cs">
+      <Link>Extensions\DataEx.cs</Link>
+    </Compile>
+    <Compile Include="..\Rush.Data\Model\RushObject.cs">
       <Link>Model\RushObject.cs</Link>
     </Compile>
     <Compile Include="..\SharedAssemblyInfo.cs">
@@ -54,6 +54,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -77,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

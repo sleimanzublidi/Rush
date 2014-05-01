@@ -5,7 +5,7 @@
         TEntity[] GetAll();
         TEntity Get(TId id);
         TEntity Insert(TEntity document);
-        TEntity Update(TEntity document, TId id);
+        TEntity Update(TId id, TEntity document);
         void Delete(TId id);
     }
 }

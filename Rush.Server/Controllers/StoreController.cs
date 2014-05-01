@@ -10,13 +10,13 @@
 
     public class StoreController : RushController
     {
-        // TODO: IoC
-        private IStoreRepository repository = new StoreRavenDbRepository();
+        private IStoreRepository repository;
 
-        public StoreController(RushContext context)
+        public StoreController(RushContext context, IStoreRepository repository)
             : base(context)
         {
-            repository.Resource = context.Resource;
+            this.repository = repository;
+            this.repository.Resource = context.Resource;
         }
 
         public override void Get()

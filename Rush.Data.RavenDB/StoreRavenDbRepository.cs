@@ -4,12 +4,14 @@
     using System.IO;
     using Raven.Client.Document;
 
-    public class StoreRavenDbRepository : StoreRepository
+    public class StoreRavenDbRepository : IStoreRepository
     {
         private const string RavenDbUrl = "http://localhost:8080";
         private const string DocumentCollectionName = "Store";
 
-        public override RushObject[] GetAll()
+        public string Resource { get; set; }
+
+        public RushObject[] GetAll()
         {
             using (var store = new DocumentStore { Url = RavenDbUrl }.Initialize())
             {
@@ -26,7 +28,7 @@
             return null;
         }
 
-        public override RushObject Get(string id)
+        public RushObject Get(string id)
         {
             using (var store = new DocumentStore { Url = RavenDbUrl }.Initialize())
             {
@@ -43,7 +45,7 @@
             return null;
         }
 
-        public override RushObject Insert(RushObject obj)
+        public RushObject Insert(RushObject obj)
         {
             using (var store = new DocumentStore { Url = RavenDbUrl }.Initialize())
             {
@@ -58,7 +60,7 @@
             return obj;
         }
 
-        public override RushObject Update(RushObject obj, string id)
+        public RushObject Update(string id, RushObject obj)
         {
             using (var store = new DocumentStore { Url = RavenDbUrl }.Initialize())
             {
@@ -72,7 +74,7 @@
             return obj;
         }
 
-        public override void Delete(string id)
+        public void Delete(string id)
         {
             using (var store = new DocumentStore { Url = RavenDbUrl }.Initialize())
             {

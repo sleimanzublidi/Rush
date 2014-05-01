@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Rush
 {
     [TestClass]
-    public class RushTests
+    public class RushClientTests
     {
         [TestMethod]
         public async Task TestSaveRushObjectAsync()

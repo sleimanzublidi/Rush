@@ -7,7 +7,7 @@
     {
         public static IDictionary<string, object> AsDictionary(this RushObject obj)
         {
-            return obj.GetProperties(true).ToDictionary(p => p.PropertyName, p => p.Value);
+            return obj.GetPropertyValues().ToDictionary(p => p.Key, p => p.Value);
         }
     }
 }

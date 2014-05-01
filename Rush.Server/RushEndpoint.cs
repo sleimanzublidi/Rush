@@ -13,7 +13,9 @@
         private RushAuthorizer authorizer = new RushAuthorizer();
 
         public RushEndpoint()
-        {}
+        {
+            RushIoC.Ininitalize();
+        }
 
         public virtual bool IsReusable { get { return true; } }
 
@@ -31,7 +33,7 @@
                     var controllerType = this.GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name.ToLower() == context.Controller.ToLower());
                     if (controllerType != null)
                     {
-                        var controller = (IRushController)Activator.CreateInstance(controllerType, new object[] { context });
+                        var controller = (IRushController)RushIoC.Resolve(controllerType);     //Activator.CreateInstance(controllerType, new object[] { context });
                         if (controller != null)
                         {
                             switch (context.Verb)

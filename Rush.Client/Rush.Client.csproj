@@ -43,13 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Rush.Data\Extensions\DataEx.cs">
+      <Link>Extensions\DataEx.cs</Link>
+    </Compile>
+    <Compile Include="..\Rush.Data\Model\RushObject.cs">
+      <Link>Model\RushObject.cs</Link>
+    </Compile>
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Data\RushClient.cs" />
-    <Compile Include="Extensions\DataEx.cs" />
     <Compile Include="Internal\TaskQueue.cs" />
-    <Compile Include="Model\RushObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
